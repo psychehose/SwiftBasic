@@ -65,3 +65,73 @@ let strings = numbers.map { (number) -> String in
     } while number > 0
     return output
 }
+
+  // MARK: - Capturing Values
+
+
+/*
+ *  클로저는 특정 문맥의 상수나 변수의 값을 캡쳐할 수 있음.
+ *  즉 원본 값이 사라져도 closure의 body 안에서 값 활용 가능
+ */
+
+
+// Example 1.
+
+/*
+ * makeIncrementer는 incrementer 라는 함수를 호출. (return type: Void 가 아니라 (Void -> Int) 임)
+ * increment 라는 함수를 들여다 보면 runningTotal, amount 이라는 변수가 없지만 에러가 없음 Why?
+ * -> increment에서 runningTotal, amount 라는 값을 캡쳐해서 가지고 있기 때문
+ */
+
+func makeIncrementer(forIncrement amount: Int) -> () -> Int {
+  var runningTotal = 0
+  func incrementer() -> Int {
+    runningTotal += amount
+    return runningTotal
+  }
+  return incrementer
+}
+
+let incrementByTen = makeIncrementer(forIncrement: 10)
+print(incrementByTen())
+print(incrementByTen())
+
+ // MARK: - 클로저는 참조 타입
+
+let alsoIncrementByTen = incrementByTen
+print(alsoIncrementByTen())
+print(incrementByTen())
+
+
+// MARK: - Escaping Closure
+// 복습하는 것이 좋을듯.
+/*
+ * 함수 밖(함수가 끝나고)에서 실행되는 클로저 (Ex. 비동기, completionHandler etc.)
+ * -> @escaping 이라는 키워드를 명시.
+ */
+
+var completionHandlers: [() -> Void] = []
+
+func someFunctionWithEscapingClosure(completionHandler: @escaping () -> Void) {
+  completionHandlers.append(completionHandler)
+}
+
+func someFunctionWithNonescapingClosure(closure: () -> Void) {
+  closure()
+}
+
+class SomeClass {
+  var x = 10
+  func doSomething() {
+    someFunctionWithEscapingClosure {
+      self.x = 100
+    }
+    someFunctionWithNonescapingClosure { x = 200 }
+  }
+}
+let instance = SomeClass()
+instance.doSomething()
+print(instance.x)
+
+completionHandlers.first?()
+print(instance.x)
