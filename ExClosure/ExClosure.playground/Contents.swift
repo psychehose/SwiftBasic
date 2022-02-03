@@ -33,10 +33,35 @@ reversedNames = names.sorted(by: { (s1: String, s2: String) -> Bool in
 })
 
 reversedNames = names.sorted(by: { s1, s2 in s1 > s2 })
+print(reversedNames)
 reversedNames = names.sorted(by: { $0 > $1 })
+print(reversedNames)
 reversedNames = names.sorted(by: > )
+print(reversedNames)
 
+// MARK: - Trailing Clousre
+
+reversedNames = names.sorted() { $0 > $1 }
+print(reversedNames)
+
+reversedNames = names.sorted { $0 > $1 }
 print(reversedNames)
 
 
 
+let digitNames = [
+    0: "Zero", 1: "One", 2: "Two",   3: "Three", 4: "Four",
+    5: "Five", 6: "Six", 7: "Seven", 8: "Eight", 9: "Nine"
+]
+let numbers = [16, 58, 510]
+
+let strings = numbers.map { (number) -> String in
+    var number = number
+    var output = ""
+    repeat {
+      // Dictionary의 subscript는 optional 이므로 ! 가 붙어있음.
+        output = digitNames[number % 10]! + output
+        number /= 10
+    } while number > 0
+    return output
+}
