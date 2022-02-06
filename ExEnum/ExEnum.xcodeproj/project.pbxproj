@@ -1,0 +1,74 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXFileReference section */
+		7762FC3A27AFCB4800DB0A69 /* ExamEnum.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ExamEnum.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		7762FC3327AFCB2B00DB0A69 = {
+			isa = PBXGroup;
+			children = (
+				7762FC3A27AFCB4800DB0A69 /* ExamEnum.playground */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		7762FC3427AFCB2B00DB0A69 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1320;
+			};
+			buildConfigurationList = 7762FC3727AFCB2B00DB0A69 /* Build configuration list for PBXProject "ExEnum" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7762FC3327AFCB2B00DB0A69;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		7762FC3827AFCB2B00DB0A69 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		7762FC3927AFCB2B00DB0A69 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7762FC3727AFCB2B00DB0A69 /* Build configuration list for PBXProject "ExEnum" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7762FC3827AFCB2B00DB0A69 /* Debug */,
+				7762FC3927AFCB2B00DB0A69 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7762FC3427AFCB2B00DB0A69 /* Project object */;
+}
