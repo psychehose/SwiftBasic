@@ -135,3 +135,30 @@ print(instance.x)
 
 completionHandlers.first?()
 print(instance.x)
+
+
+var completionHandlers2: [(Int) -> Void] = []
+
+func someFunctionWithEscapingClosure2(completionHandler: @escaping (Int) -> Void) {
+  completionHandlers2.append(completionHandler)
+}
+
+func someFunctionWithNonescapingClosure2(closure: () -> Void) {
+  closure()
+}
+
+class SomeClass2 {
+  var x = 10
+  func doSomething() {
+    someFunctionWithEscapingClosure2 { test in
+      self.x = test
+    }
+    someFunctionWithNonescapingClosure2 { x = 200 }
+  }
+}
+let instance2 = SomeClass2()
+instance2.doSomething()
+print(instance2.x)
+
+completionHandlers2.first?(300)
+print(instance2.x)
