@@ -162,3 +162,63 @@ print(instance2.x)
 
 completionHandlers2.first?(300)
 print(instance2.x)
+
+// MARK: - Auto Closures
+
+/*
+ * No args
+ * 특정 표현을 감싸서 다른 함수의 args로 전달 가능
+ *  "클로저를 실행하고 나서 실제 진행"
+ *
+ */
+
+// Example.
+
+
+var customersInLine = ["Chris", "Alex", "Ewa", "Barry", "Daniella"]
+print(customersInLine.count)
+// Prints "5"
+
+let customerProvider = { customersInLine.remove(at: 0) }
+print(customersInLine.count)
+// Prints "5"
+
+print("Now serving \(customerProvider())!")
+// Prints "Now serving Chris!"
+print(customersInLine.count)
+// Prints "4"
+
+
+// customersInLine is ["Alex", "Ewa", "Barry", "Daniella"]
+func serve(customer customerProvider: () -> String) {
+    print("Now serving \(customerProvider())!")
+}
+
+serve(customer: { customersInLine.remove(at: 0) } )
+// Prints "Now serving Alex!"
+
+
+// Using @autoclosure
+
+func serve(customer customerProvider: @autoclosure () -> String) {
+    print("Now serving \(customerProvider())!")
+}
+serve(customer: customersInLine.remove(at: 0))
+// Prints "Now serving Ewa!"
+
+
+// customersInLine is ["Barry", "Daniella"]
+var customerProviders: [() -> String] = []        //  클로저를 저장하는 배열을 선언
+func collectCustomerProviders(_ customerProvider: @autoclosure @escaping () -> String) {
+    customerProviders.append(customerProvider)
+} // 클로저를 인자로 받아 그 클로저를 customerProviders 배열에 추가하는 함수를 선언
+collectCustomerProviders(customersInLine.remove(at: 0))    // 클로저를 customerProviders 배열에 추가
+collectCustomerProviders(customersInLine.remove(at: 0))
+
+print("Collected \(customerProviders.count) closures.")
+// Prints "Collected 2 closures."        // 2개의 클로저가 추가 됨
+for customerProvider in customerProviders {
+    print("Now serving \(customerProvider())!")    // 클로저를 실행하면 배열의 0번째 원소를 제거하며 그 값을 출력
+}
+// Prints "Now serving Barry!"
+// Prints "Now serving Daniella!"
